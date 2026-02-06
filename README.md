@@ -78,8 +78,8 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 | Projet                 | Description                                           | Accès Rapide                                                                                                                                                        |
 |------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **A venir**           | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
-| **A venir**                | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
+| **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
+| **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
 | **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
 
 </div>
@@ -119,12 +119,12 @@ Proxmox fournit une interface web, une API REST et des outils en ligne de comman
 
 ```
 +--------------------------------+
-| Serveur physique (Node A)      |
+|   Serveur physique (Node A)    |
 |  +--------------------------+  |
-|  | Proxmox VE               |  |
+|  |       Proxmox VE         |  |
 |  |  +-----+   +---------+   |  |
 |  |  | KVM |   |  LXC    |   |  |
-|  |  |VMs  |   |CTs      |   |  |
+|  |  | VMs |   |  CTs    |   |  |
 |  |  +-----+   +---------+   |  |
 |  |  bridge vmbr0 -> NIC     |  |
 |  |  Storage: local ZFS/LVM  |  |
@@ -151,9 +151,9 @@ Explication : sur un seul serveur, Proxmox gère des VM KVM et des conteneurs LX
        |   Ceph public  |   Ceph public   |
        +------ OSDs & MONs (RADOS) --------+
                       |
-                 RBD (block devices)
+              RBD (block devices)
                       |
-                 Clients via librbd
+              Clients via librbd
 
 Quorum & Corosync pour la gestion du cluster et des composants HA
 ```
@@ -170,9 +170,9 @@ Internet
   Router
    |
 +-------+        +-------------------------------------+
-| Switch|--------| Host (Node)                         |
+| Switch|--------|            Host (Node)              |
 +-------+        |  +-------------------------------+  |
-                 |  | Physical NIC (eth0)           |  |
+                 |  |     Physical NIC (eth0)       |  |
                  |  |  +-------------------------+  |  |
                  |  |  | bond0 (opt)             |  |  |
                  |  |  +-------------------------+  |  |
