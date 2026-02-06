@@ -86,154 +86,187 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 ---
 
-# 💡 **Qu'est-ce qu'un firewall ?**
+# Proxmox VE — Guide pédagogique
 
-## Définition détaillée d’un Firewall
-
-Un **firewall** (pare-feu) est un dispositif matériel ou logiciel qui surveille, filtre et contrôle le trafic réseau entre différentes zones de confiance (ex : Internet ↔ réseau interne). Il applique des règles pour autoriser, refuser ou rediriger les paquets selon des critères précis : adresses IP, ports, protocoles, état de connexion, etc.
-
-### Rôles principaux :
-- **Filtrage** : Bloquer ou autoriser des flux selon des règles.
-- **Journalisation** : Tracer les accès et tentatives.
-- **Traduction d’adresses (NAT)** : Masquer ou rediriger des adresses IP.
-- **Segmentation** : Isoler des zones (DMZ, LAN, WAN).
-- **Inspection d’état** : Suivre l’état des connexions (stateful).
+Ce document présente Proxmox Virtual Environment (Proxmox VE) de manière pédagogique, avec explications clés et schémas ASCII pour usage sur GitHub.
 
 ---
 
-## 1. Schéma général : Positionnement d’un firewall
+## Qu'est-ce que Proxmox VE ?
+Proxmox VE est une plateforme open source de virtualisation pour serveurs qui combine :
+- la virtualisation complète via KVM (machines virtuelles),
+- les conteneurs légers via LXC,
+- la gestion de stockage et réseau, les sauvegardes, la haute disponibilité (HA) et le clustering.
+
+Proxmox fournit une interface web, une API REST et des outils en ligne de commande.
+
+---
+
+## Concepts clés
+- **Nœud (Node)** : un serveur physique exécutant Proxmox VE.
+- **Cluster** : ensemble de nœuds partageant la configuration et permettant HA et migration.
+- **KVM (qm)** : hyperviseur pour machines virtuelles (VM).
+- **LXC (pct)** : conteneurs légers.
+- **Stockage** : local, NFS, iSCSI, Ceph (RBD), LVM, ZFS.
+- **Réseau** : bridge Linux (`vmbr`), bonds, VLANs, SDN (avancé).
+- **HA & Quorum** : gestion des pannes et redémarrage automatique des VM/CT sur d'autres nœuds.
+
+---
+
+## Schémas ASCII pédagogiques
+
+### 1) Topologie simple — Nœud unique
 
 ```
-   [Internet]
-        |
-   +----v----+
-   | Firewall|
-   +----+----+
-        |
-   [Réseau privé]
++--------------------------------+
+| Serveur physique (Node A)      |
+|  +--------------------------+  |
+|  | Proxmox VE               |  |
+|  |  +-----+   +---------+   |  |
+|  |  | KVM |   |  LXC    |   |  |
+|  |  |VMs  |   |CTs      |   |  |
+|  |  +-----+   +---------+   |  |
+|  |  bridge vmbr0 -> NIC     |  |
+|  |  Storage: local ZFS/LVM  |  |
+|  +--------------------------+  |
++--------------------------------+
+```
+
+Explication : sur un seul serveur, Proxmox gère des VM KVM et des conteneurs LXC, connectés via un bridge vers la carte réseau et stockés sur des volumes locaux.
+
+---
+
+### 2) Cluster Proxmox avec stockage Ceph
+
+```
+       +----------------------------------------+
+       |               Cluster VE               |
+       |                                        |
++------+-------+   +------+-------+   +------+-------+
+| Node A (pve) |   | Node B (pve) |   | Node C (pve) |
+|  Proxmox VE  |   |  Proxmox VE  |   |  Proxmox VE  |
+|  VMs & CTs   |   |  VMs & CTs   |   |  VMs & CTs   |
++------+-------+   +------+-------+   +------+-------+
+       |                |                 |
+       |   Ceph public  |   Ceph public   |
+       +------ OSDs & MONs (RADOS) --------+
+                      |
+                 RBD (block devices)
+                      |
+                 Clients via librbd
+
+Quorum & Corosync pour la gestion du cluster et des composants HA
+```
+
+Explication : Ceph fournit du stockage distribué, accessible par tous les nœuds. Le cluster Proxmox utilise `pvecm`/Corosync pour la configuration et l'orchestration HA.
+
+---
+
+### 3) Réseau typique avec bridges et VLANs
+
+```
+Internet
+   |
+  Router
+   |
++-------+        +-------------------------------------+
+| Switch|--------| Host (Node)                         |
++-------+        |  +-------------------------------+  |
+                 |  | Physical NIC (eth0)           |  |
+                 |  |  +-------------------------+  |  |
+                 |  |  | bond0 (opt)             |  |  |
+                 |  |  +-------------------------+  |  |
+                 |  |  | vmbr0 (bridge)          |  |  |
+                 |  |  |  - VLAN 10 -> vmbr0.10  |  |  |
+                 |  |  |  - VLAN 20 -> vmbr0.20  |  |  |
+                 |  |  +-------------------------+  |  |
+                 |  |  | VM/CT NICs attached     |  |  |
+                 |  |  +-------------------------+  |  |
+                 |  +-------------------------------+  |
+                 +-------------------------------------+
+```
+
+Explication : on utilise des bridges (`vmbr`) pour connecter VM/CT au réseau physique; les VLANs et bonds améliorent isolation et résilience.
+
+---
+
+## Commandes utiles
+- Afficher la version :
+
+```
+pveversion
+```
+
+- Statut du cluster :
+
+```
+pvecm status
+```
+
+- Lister VMs :
+
+```
+qm list
+```
+
+- Lister containers :
+
+```
+pct list
+```
+
+- Sauvegarder une VM (vzdump) :
+
+```
+vzdump 101 --storage local --mode snapshot
+```
+
+- Créer un container LXC minimal (exemple) :
+
+```
+pct create 101 local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.gz --ostype ubuntu --cores 2 --memory 2048
+```
+
+- Importer un disque Ceph RBD en tant que storage :
+
+```
+pveceph install
+pvesm add rbd ceph-store --pool vm --monhost a.b.c.d
 ```
 
 ---
 
-## 2. Logique de décision d’un firewall (filtrage)
+## Exemples rapides
+- Créer une VM (ligne de commande) :
 
 ```
-+-------------------+
-|   Paquet réseau   |
-+-------------------+
-         |
-         v
-+------------------------+
-|  Règle correspondante ?|
-+------------------------+
-   | Oui         | Non
-   v             v
-[Action]     [Bloqué]
+qm create 100 --name vm100 --memory 4096 --net0 virtio,bridge=vmbr0 --scsi0 local-lvm:32
+qm importdisk 100 disk-image.qcow2 local-lvm
+qm set 100 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-100-disk-0
+qm start 100
 ```
 
----
-
-## 3. Filtrage stateless vs stateful
-
-- **Stateless** : Le firewall examine chaque paquet indépendamment, sans tenir compte du contexte.
-- **Stateful** : Le firewall garde en mémoire l’état des connexions (ex : TCP SYN/ACK), ce qui permet de n’autoriser que les paquets attendus dans une session.
-
-### Schéma : Suivi d’état (stateful)
+- Migrer une VM vers un autre nœud (live migration) :
 
 ```
-[Client] ---- SYN ----> [Firewall] ----> [Serveur]
-         <--- SYN/ACK --
-         ---- ACK ------>
-```
-Le firewall autorise les paquets de réponse uniquement s’ils correspondent à une connexion initiée.
-
----
-
-## 4. Translation d’adresses (NAT)
-
-La **NAT** (Network Address Translation) permet de faire correspondre des adresses IP privées à une adresse publique, pour masquer le réseau interne ou rediriger des ports.
-
-### Schéma : NAT simple
-
-```
-[LAN: 192.168.1.10] --+
-[LAN: 192.168.1.11] --+--> [Firewall NAT] --> [Internet: 203.0.113.5]
-```
-Tous les flux sortants semblent provenir de l’IP publique du firewall.
-
-### Schéma : Redirection de port (Port Forwarding)
-
-```
-[Internet:203.0.113.5:2222] --> [Firewall NAT] --> [LAN:192.168.1.10:22]
-```
-Le firewall redirige le port 2222 externe vers le port 22 d’une machine interne.
-
----
-
-## 5. DMZ (Zone Démilitarisée)
-
-Une **DMZ** est une zone réseau intermédiaire, isolée du LAN, où l’on place les serveurs accessibles depuis Internet (web, mail, etc.).  
-Cela limite les risques pour le réseau interne en cas de compromission d’un serveur public.
-
-### Schéma : DMZ
-
-```
-           [Internet]
-                |
-           +----v----+
-           | Firewall|
-           +----+----+
-                |
-      +---------+----------+
-      |                    |
-   [DMZ]                [LAN]
-(serveurs web, etc.)   (PC internes)
+qm migrate 100 target-node
 ```
 
 ---
 
-## 6. Exemple de règles logiques (table de filtrage)
-
-| Source           | Destination      | Port | Action    | État connexion |
-|------------------|-----------------|------|-----------|---------------|
-| Internet         | DMZ (web)       | 80   | Autoriser | NEW/ESTABLISHED|
-| Internet         | LAN             | *    | Refuser   | *             |
-| LAN              | Internet        | 80   | Autoriser | ESTABLISHED   |
-| DMZ              | LAN             | *    | Refuser   | *             |
+## Bonnes pratiques (résumé)
+- Utiliser un cluster avec un minimum de 3 nœuds pour le quorum.
+- Séparer le réseau de stockage (Ceph) et le réseau de VM.
+- Sauvegarder régulièrement avec `vzdump` et tester les restaurations.
+- Monitorer via Grafana/Prometheus ou l'interface intégrée.
+- Tester la migration et le basculement HA avant production.
 
 ---
 
-## 7. Schéma éclaté : Flux réseau avec firewall, NAT et DMZ
+## Ressources
+- Documentation officielle : https://www.proxmox.com/en/proxmox-ve
+- Manuel Proxmox VE : https://pve.proxmox.com/wiki/Main_Page
 
-```
-[Internet]
-    |
-    v
-+-------------------+
-|     Firewall      |
-|-------------------|
-| - Filtrage        |
-| - NAT             |
-| - Suivi d'état    |
-+---+-----------+---+
-    |           |
-   DMZ         LAN
-(serveur web) (PC internes)
-```
-
-- Le firewall filtre et traduit les adresses.
-- Les flux autorisés vers la DMZ n’atteignent pas le LAN.
-- Les connexions sortantes du LAN passent par la NAT.
-
----
-
-## 8. Résumé pédagogique
-
-- Un firewall contrôle le trafic selon des règles précises.
-- Il peut être stateless (simple) ou stateful (plus sûr).
-- Il gère la translation d’adresses (NAT) pour masquer ou rediriger.
-- Il permet de segmenter le réseau (DMZ) pour limiter les risques.
-- Les schémas aident à visualiser la logique et la circulation des flux.
 
 ---
 
