@@ -68,7 +68,7 @@ Exécutez les commandes en root. Cette procédure désactive le dépôt enterpri
 
 ---
 
-## 0 — Pré-requis et précautions
+## 0) - Pré-requis et précautions
 
 - Sauvegardez la configuration et assurez-vous d'avoir un accès console local ou KVM (éviter de perdre l'accès SSH pendant la manipulation).  
 - Ne supprimez pas définitivement les fichiers de sources : sauvegardez-les et renommez-les pour les désactiver.  
@@ -78,7 +78,7 @@ Empreinte recommandée : `24B30F06ECC1836A4E5EFECBA7BCD1420BFE778E`
 
 ---
 
-## 1 — Désactiver les sources `enterprise` (sauvegarde + rename)
+## 1) - Désactiver les sources `enterprise` (sauvegarde + rename)
 
 ```bash
 # sauvegarder et désactiver (ne pas supprimer)
@@ -94,7 +94,7 @@ Remarque : conservez les fichiers `.disabled` pour revenir en arrière facilemen
 
 ---
 
-## 2 — Importer la clé Proxmox (méthode recommandée)
+## 2) - Importer la clé Proxmox (méthode recommandée)
 
 Si votre serveur peut contacter les keyservers HKPS :
 
@@ -123,7 +123,7 @@ rm -f /tmp/proxmox-release-trixie.gpg.bin /root/proxmox-release-trixie.gpg
 
 ---
 
-## 3 — Créer le fichier sources `pve-no-subscription`
+## 3) - Créer le fichier sources `pve-no-subscription`
 
 Créer `/etc/apt/sources.list.d/pve-no-subscription.sources` avec le contenu suivant :
 
@@ -151,7 +151,7 @@ Remarque : vérifiez le nom de la suite (`trixie`) si vous utilisez une autre ve
 
 ---
 
-## 4 — Mettre à jour les index et upgrader
+## 4) - Mettre à jour les index et upgrader
 
 ```bash
 apt update
@@ -165,7 +165,7 @@ Conseil : sur un serveur de production, préférez `apt upgrade` + redémarrage 
 
 ---
 
-## 5 — Nettoyage / vérification
+## 5) - Nettoyage / vérification
 
 - Vérifiez que le paquet `pve-manager` vient bien du dépôt `download.proxmox.com` :
 
