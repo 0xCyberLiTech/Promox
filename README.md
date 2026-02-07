@@ -115,7 +115,7 @@ Proxmox fournit une interface web, une API REST et des outils en ligne de comman
 
 ## Schémas ASCII pédagogiques
 
-### 1) Topologie simple — Nœud unique
+### 1) - Topologie simple — Nœud unique
 
 ```
 +--------------------------------+
@@ -136,7 +136,7 @@ Explication : sur un seul serveur, Proxmox gère des VM KVM et des conteneurs LX
 
 ---
 
-### 2) Cluster Proxmox avec stockage Ceph
+### 2) - Cluster Proxmox avec stockage Ceph
 
 ```
        +----------------------------------------+
@@ -162,7 +162,7 @@ Explication : Ceph fournit du stockage distribué, accessible par tous les nœud
 
 ---
 
-### 3) Réseau typique avec bridges et VLANs
+### 3) - Réseau typique avec bridges et VLANs
 
 ```
 Internet
