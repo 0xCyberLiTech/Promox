@@ -80,7 +80,7 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 |------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Proxmox** | Configuration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Proxmox_configuration.md) |
 | **Proxmox** | Mise à jour. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Mise_a_jour_Proxmox_VE.md) |
-| **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Backup_restauration_VM_Proxmox.md) |
+| **Proxmox** | Backup et restauration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Backup_restauration_VM_Proxmox.md) |
 
 </div>
 
