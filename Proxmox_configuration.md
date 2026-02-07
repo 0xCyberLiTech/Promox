@@ -63,7 +63,9 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 ---
 
 <div align="center" style="margin-bottom: 10px;">
+  
 # Proxmox - Donner un accès Internet aux VMs sur le réseau interne vmbr1 en 10.100.100.0/24 alors que la sortie Internet est via vmbr0.
+
 </div>
 
 ## Résumé rapide
