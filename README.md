@@ -78,7 +78,7 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 | Projet                 | Description                                           | Accès Rapide                                                                                                                                                        |
 |------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
+| **Proxmox** | Configuration. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Proxmox_configuration.md) |
 | **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
 | **A venir** | A venir. | [<img src="https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white">]() |
 
