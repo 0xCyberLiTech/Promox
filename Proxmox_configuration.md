@@ -165,9 +165,7 @@ Ou via DHCP si vous installez un serveur DHCP sur `vmbr1`.
 
 Suggestion : Génère un `interfaces` complet prêt à coller + script d'installation automatique des règles.
 
-Les fichiers et scripts prêts — ci‑dessous le contenu à coller et le script d'installation.
-
-Remplacez/mergez la section `vmbr1` si besoin ; conservez votre configuration `vmbr0` existante.
+Exemple : d’un fichier /etc/network/interfaces prêt à être copié et collé.
 
 ### /etc/network/interfaces (extrait pertinent)
 
