@@ -103,7 +103,9 @@ gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys 24B30F06ECC1836A4E5EFECB
 gpg --export 24B30F06ECC1836A4E5EFECBA7BCD1420BFE778E | gpg --dearmor -o /etc/apt/trusted.gpg.d/proxmox-release-trixie.gpg
 chmod 644 /etc/apt/trusted.gpg.d/proxmox-release-trixie.gpg
 ```
-
+```bash
+File '/etc/apt/trusted.gpg.d/proxmox-release-trixie.gpg' exists. Overwrite? (y/N) yes
+```
 Vérifier l'empreinte :
 
 ```bash
