@@ -3,7 +3,7 @@
   <br></br>
   
   <a href="https://github.com/0xCyberLiTech">
-    <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=50&duration=6000&pause=1000000000&color=FF0048&center=true&vCenter=true&width=1100&lines=%3EPROXMOX_" alt="Titre dynamique FIREWALL" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=50&duration=6000&pause=1000000000&color=FF0048&center=true&vCenter=true&width=1100&lines=%3EPROXMOX_" alt="Titre dynamique PROXMOX" />
   </a>
   
   <br></br>
@@ -17,16 +17,16 @@
     <a href="https://github.com/0xCyberLiTech">
       <img src="https://img.shields.io/badge/Profil-GitHub-181717?logo=github&style=flat-square" alt="🔗 Profil GitHub" />
     </a>
-    <a href="https://github.com/0xCyberLiTech/Firewall/releases/latest">
-      <img src="https://img.shields.io/github/v/release/0xCyberLiTech/Firewall?label=version&style=flat-square&color=blue" alt="📦 Dernière version" />
+    <a href="https://github.com/0xCyberLiTech/Proxmox/releases/latest">
+      <img src="https://img.shields.io/github/v/release/0xCyberLiTech/Proxmox?label=version&style=flat-square&color=blue" alt="📦 Dernière version" />
     </a>
-    <a href="https://github.com/0xCyberLiTech/Firewall/blob/main/CHANGELOG.md">
-      <img src="https://img.shields.io/badge/📄%20Changelog-Firewall-blue?style=flat-square" alt="📄 CHANGELOG Firewall" />
+    <a href="https://github.com/0xCyberLiTech/Proxmox/blob/main/CHANGELOG.md">
+      <img src="https://img.shields.io/badge/📄%20Changelog-Proxmox-blue?style=flat-square" alt="📄 CHANGELOG Firewall" />
     </a>
     <a href="https://github.com/0xCyberLiTech?tab=repositories">
       <img src="https://img.shields.io/badge/Dépôts-publics-blue?style=flat-square" alt="📂 Dépôts publics" />
     </a>
-    <a href="https://github.com/0xCyberLiTech/Firewall/graphs/contributors">
+    <a href="https://github.com/0xCyberLiTech/Proxmox/graphs/contributors">
       <img src="https://img.shields.io/badge/👥%20Contributeurs-cliquez%20ici-007ec6?style=flat-square" alt="👥 Contributeurs Firewall" />
     </a>
   </p>
@@ -78,9 +78,9 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 | Projet                 | Description                                           | Accès Rapide                                                                                                                                                        |
 |------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Proxmox** | Configuration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Proxmox_configuration.md) |
-| **Proxmox** | Mise à jour. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Mise_a_jour_Proxmox_VE.md) |
-| **Proxmox** | Backup et restauration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Promox/blob/main/Backup_restauration_VM_Proxmox.md) |
+| **Proxmox** | Configuration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Proxmox/blob/main/Proxmox_configuration.md) |
+| **Proxmox** | Mise à jour. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Proxmox/blob/main/Mise_a_jour_Proxmox_VE.md) |
+| **Proxmox** | Backup et restauration. | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](https://github.com/0xCyberLiTech/Proxmox/blob/main/Backup_restauration_VM_Proxmox.md) |
 
 </div>
 
@@ -278,4 +278,5 @@ qm migrate 100 target-node
 <div align="center">
   <b>🔒 Un guide proposé par <a href="https://0xcyberlitech.com/">0xCyberLiTech</a> • Pour des tutoriels accessibles à tous. 🔒</b>
 </div>
+
 
